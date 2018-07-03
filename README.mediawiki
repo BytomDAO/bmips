@@ -5,7 +5,7 @@ Having a BMIP here does not make it a formally accepted standard until its statu
 
 Those proposing changes should consider that ultimately consent may rest with the consensus of the Bytom users.
 
-Review [[BMIP-001.mediawiki|BMIP-001]] and follow the instructions to submit a [https://github.com/bytom/bmip/pulls Pull Request] to this repository.
+Review [[bmip-001.mediawiki|BMIP-001]] and follow the instructions to submit a [https://github.com/bytom/bmip/pulls Pull Request] to this repository.
 
 ==Table of Contents==
 
