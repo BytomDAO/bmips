@@ -1,0 +1,29 @@
+BytoM Improvement Proposals (BMIPs) describe standards for the Bytom platform, including core protocol, VM specifications, client APIs  and contract standards.
+Having a BMIP here does not make it a formally accepted standard until its status becomes Final or Active.
+
+Those proposing changes should consider that ultimately consent may rest with the consensus of the Bytom users.
+
+{| class="wikitable sortable" style="width: auto; text-align: center; font-size: smaller; table-layout: fixed;"
+!Number
+!Layer
+!Title
+!Owner
+!Type
+!Status
+|- style="background-color: #cfffcf"
+| [[bmip-001.mediawiki|1]]
+|
+| BMIP Purpose and Guidelines
+| Lang Yu
+| Process
+| Active
+|-
+| [[bmip-008.mediawiki|8]]
+|
+| Version bits with lock-in by height
+| Shaolin Fry
+| Informational
+| Draft
+|}
+
+<!-- IMPORTANT!  See the instructions at the top of this page, do NOT JUST add BIPs here! -->

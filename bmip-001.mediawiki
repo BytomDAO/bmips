@@ -1,0 +1,238 @@
+<pre>
+  BMIP: 1
+  Title: BMIP Purpose and Guidelines
+  Author: Lang Yu <langyu@bytom.io>
+  Comments-Summary: No comments yet.
+  Comments-URI: https://github.com/bytom/bmips/wiki/Comments:BMIP-001
+  Status: Active
+  Type: Process
+  Created: 2018-07-03
+</pre>
+
+==What is a BMIP?==
+
+A Bytom Improvement Proposal (BMIP) is a design document providing information to the Bytom community, or describing a new feature for Bytom or its processes or environment. The BMIP should provide a concise technical specification of the feature and a rationale for the feature.
+
+We intend BMIPs to be the primary mechanisms for proposing new features, for collecting community input on an issue, and for documenting the design decisions that have gone into Bytom. The BMIP author is responsible for building consensus within the community and documenting dissenting opinions.
+
+Because the BMIPs are maintained as text files in a versioned repository, their revision history is the historical record of the feature proposal.
+
+
+==BMIP Types==
+
+There are three kinds of BMIP:
+
+* A Standards Track BMIP describes any change that affects most or all Bytom implementations, such as a change to the network protocol, a change in block or transaction validity rules, or any change or addition that affects the interoperability of applications using Bytom.
+* An Informational BMIP describes a Bytom design issue, or provides general guidelines or information to the Bytom community, but does not propose a new feature. Informational BMIPs do not necessarily represent a Bytom community consensus or recommendation, so users and implementors are free to ignore Informational BMIPs or follow their advice.
+* A Meta BMIP describes a process surrounding Bytom, or proposes a change to (or an event in) a process. Process BMIPs are like Standards Track BMIPs but apply to areas other than the Bytom protocol itself. They may propose an implementation, but not to Bytom's codebase; they often require community consensus; unlike Informational BMIPs, they are more than recommendations, and users are typically not free to ignore them. Examples include procedures, guidelines, changes to the decision-making process, and changes to the tools or environment used in Bytom development.
+
+==BMIP Work Flow==
+
+The BMIP process begins with a new idea for Bytom. Each potential BMIP must have a champion -- someone who writes the BMIP using the style and format described below, shepherds the discussions in the appropriate ways, and attempts to build community consensus around the idea. The BMIP champion (a.k.a. Author) should first attempt to ascertain whether the idea is BMIP-able. Posting to the development community.
+
+Vetting an idea publicly before going as far as writing a BMIP is meant to save both the potential author and the wider community time. Many ideas have been brought forward for changing Bytom that have been rejected for various reasons. Asking the Bytom community first if an idea is original helps prevent too much time being spent on something that is guaranteed to be rejected based on prior discussions (searching the internet does not always do the trick). It also helps to make sure the idea is applicable to the entire community and not just the author. Just because an idea sounds good to the author does not mean it will work for most people in most areas where Bytom is used. Small enhancements or patches often don't need standardisation between multiple projects; these don't need a BMIP and should be injected into the relevant Bytom development work flow with a patch submission to the applicable Bytom issue tracker.
+
+Once the champion has asked the Bytom community as to whether an idea has any chance of acceptance, a draft BMIP should be presented to the community. This gives the author a chance to flesh out the draft BMIP to make it properly formatted, of high quality, and to address additional concerns about the proposal. Following a discussion, the proposal should be sent to the bytom-dev community and the BMIP editor with the draft BMIP. This draft must be written in BMIP style as described below, else it will be sent back without further regard until proper formatting rules are followed.
+
+BMIP authors are responsible for collecting community feedback on both the initial idea and the BMIP before submitting it for review. However, wherever possible, long open-ended discussions on the public forum should be avoided. 
+
+It is highly recommended that a single BMIP contain a single key proposal or new idea. The more focused the BMIP, the more successful it tends to be. If in doubt, split your BMIP into several well-focused ones.
+
+The BMIP editors assign BMIP numbers and change their status. Please send all BMIP-related email to the BMIP editor, which is listed under [[#BMIP_Editors|BMIP Editors]] below. Also see [[#BMIP_Editor_Responsibilities__Workflow|BMIP Editor Responsibilities & Workflow]]. The BMIP editor reserves the right to reject BMIP proposals if they appear too unfocused or too broad.
+
+Authors MUST NOT self assign BMIP numbers, but should use an alias such as "BMIP-bob-posbytoms" which includes the author's name/nick and the BMIP subject.
+
+If the BMIP editor approves, he will assign the BMIP a number, label it as Standards Track, Informational, or Meta, give it status "Draft", and add it to the BMIPs git repository. The BMIP editor will not unreasonably deny a BMIP. Reasons for denying BMIP status include duplication of effort, disregard for formatting rules, being too unfocused or too broad, being technically unsound, not providing proper motivation or addressing backwards compatibility, or not in keeping with the Bytom philosophy. For a BMIP to be accepted it must meet certain minimum criteria. It must be a clear and complete description of the proposed enhancement. The enhancement must represent a net improvement. The proposed implementation, if applicable, must be solid and must not complicate the protocol unduly.
+
+The BMIP author may update the Draft as necessary in the git repository. Updates to drafts may also be submitted by the author as pull requests.
+
+Standards Track BMIPs consist of two parts, a design document and a reference implementation. The BMIP should be reviewed and accepted before a reference implementation is begun, unless a reference implementation will aid people in studying the BMIP. Standards Track BMIPs must include an implementation -- in the form of code, a patch, or a URL to same -- before it can be considered Final.
+
+Once a BMIP has been accepted, the reference implementation must be completed. When the reference implementation is complete and accepted by the community, the status will be changed to "Final".
+
+A BMIP can also be assigned status "Deferred". The BMIP author or editor can assign the BMIP this status when no progress is being made on the BMIP. Once a BMIP is deferred, the BMIP editor can re-assign it to draft status.
+
+A BMIP can also be "Rejected". Perhaps after all is said and done it was not a good idea. It is still important to have a record of this fact.
+
+BMIPs can also be superseded by a different BMIP, rendering the original obsolete. This is intended for Informational BMIPs, where version 2 of an API can replace version 1.
+
+The possible paths of the status of BMIPs are as follows:
+
+<img src=BMIP-0001/process.png></img>
+
+Some Informational and Process BMIPs may also have a status of "Active" if they are never meant to be completed. E.g. BMIP 1 (this BMIP).
+
+==What belongs in a successful BMIP?==
+
+Each BMIP should have the following parts:
+
+* Preamble -- RFC 822 style headers containing meta-data about the BMIP, including the BMIP number, a short descriptive title (limited to a maximum of 44 characters), the names, and optionally the contact info for each author, etc.
+
+* Abstract -- a short (~200 word) description of the technical issue being addressed.
+
+* Copyright/public domain -- Each BMIP must either be explicitly labelled as placed in the public domain (see this BMIP as an example) or licensed under the Open Publication License.
+
+* Specification -- The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Bytom platforms.
+
+* Motivation -- The motivation is critical for BMIPs that want to change the Bytom protocol. It should clearly explain why the existing protocol specification is inadequate to address the problem that the BMIP solves. BMIP submissions without sufficient motivation may be rejected outright.
+
+* Rationale -- The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages.
+
+* The rationale should provide evidence of consensus within the community and discuss important objections or concerns raised during discussion.
+
+* Backwards Compatibility -- All BMIPs that introduce backwards incompatibilities must include a section describing these incompatibilities and their severity. The BMIP must explain how the author proposes to deal with these incompatibilities. BMIP submissions without a sufficient backwards compatibility treatise may be rejected outright.
+
+* Reference Implementation -- The reference implementation must be completed before any BMIP is given status "Final", but it need not be completed before the BMIP is accepted. It is better to finish the specification and rationale first and reach consensus on it before writing code.
+
+* The final implementation must include test code and documentation appropriate for the Bytom protocol.
+
+==BMIP Formats and Templates==
+
+BMIPs should be written in mediawiki or markdown format.
+
+===BMIP Header Preamble===
+
+Each BMIP must begin with an RFC 822 style header preamble. The headers must appear in the following order. Headers marked with "*" are optional and are described below. All other headers are required.
+
+<pre>
+  BMIP: <BMIP number>
+  Title: <BMIP title>
+  Author: <list of authors' real names and optionally, email addrs>
+* Discussions-To: <email address>
+  Status: <Draft | Active | Accepted | Deferred | Rejected |
+           Withdrawn | Final | Superseded>
+  Type: <Standards Track | Informational | Meta>
+  Created: <date created on, in ISO 8601 (yyyy-mm-dd) format>
+* Post-History: <dates of postings to bytom community>
+* Replaces: <BMIP number>
+* Superseded-By: <BMIP number>
+* Resolution: <url>
+</pre>
+
+The Author header lists the names, and optionally the email addresses of all the authors/owners of the BMIP. The format of the Author header value must be
+
+  Random J. User <address@dom.ain>
+
+if the email address is included, and just
+
+  Random J. User
+
+if the address is not given.
+
+If there are multiple authors, each should be on a separate line following RFC 2822 continuation line conventions.
+
+Note: The Resolution header is required for Standards Track BMIPs only. It contains a URL that should point to an email message or other web resource where the pronouncement about the BMIP is made.
+
+While a BMIP is in private discussions (usually during the initial Draft phase), a Discussions-To header will indicate the URL where the BMIP is being discussed. No Discussions-To header is necessary if the BMIP is being discussed privately with the author, or on the bytom community.
+
+The Type header specifies the type of BMIP: Standards Track, Informational, or Process.
+
+The Created header records the date that the BMIP was assigned a number, while Post-History is used to record the dates of when new versions of the BMIP are posted to bytom community. Both headers should be in yyyy-mm-dd format, e.g. 2001-08-14.
+
+BMIPs may have a Requires header, indicating the BMIP numbers that this BMIP depends on.
+
+BMIPs may also have a Superseded-By header indicating that a BMIP has been rendered obsolete by a later document; the value is the number of the BMIP that replaces the current document. The newer BMIP must have a Replaces header containing the number of the BMIP that it rendered obsolete.
+
+===Auxiliary Files===
+
+BMIPs may include auxiliary files such as diagrams. Image files should be included in a subdirectory for that BMIP. Auxiliary files must be named BMIP-XXXX-Y.ext, where "XXXX" is the BMIP number, "Y" is a serial number (starting at 1), and "ext" is replaced by the actual file extension (e.g. "png").
+
+==Transferring BMIP Ownership==
+
+It occasionally becomes necessary to transfer ownership of BMIPs to a new champion. In general, we'd like to retain the original author as a co-author of the transferred BMIP, but that's really up to the original author. A good reason to transfer ownership is because the original author no longer has the time or interest in updating it or following through with the BMIP process, or has fallen off the face of the 'net (i.e. is unreachable or not responding to email). A bad reason to transfer ownership is because you don't agree with the direction of the BMIP. We try to build consensus around a BMIP, but if that's not possible, you can always submit a competing BMIP.
+
+If you are interested in assuming ownership of a BMIP, send a message asking to take over, addressed to both the original author and the BMIP editor. If the original author doesn't respond to email in a timely manner, the BMIP editor will make a unilateral decision (it's not like such decisions can't be reversed :).
+
+==BMIP Editors==
+
+The current BMIP editor is Lang Yu who can be contacted at [[mailto:langyu@bytom.io|langyu@bytom.io]].
+
+==BMIP Editor Responsibilities & Workflow==
+
+For each new BMIP that comes in an editor does the following:
+
+* Read the BMIP to check if it is ready: sound and complete. The ideas must make technical sense, even if they don't seem likely to be accepted.
+* The title should accurately describe the content.
+* Edit the BMIP for language (spelling, grammar, sentence structure, etc.), markup (for reST BMIPs), code style.
+
+If the BMIP isn't ready, the editor will send it back to the author for revision, with specific instructions.
+
+Once the BMIP is ready for the repository it should be submitted as a "pull request" to the [https://github.com/bytom/bmips bytom/bmips] repository on GitHub where it may get further feedback.
+
+The BMIP editor will:
+
+* Assign a BMIP number (almost always just the next available number, but sometimes it's a special/joke number, like 666 or 3141) in the pull request comments.
+
+* Merge the pull request when the author is ready (allowing some time for further peer review).
+
+* List the BMIP in [[README.mediawiki]]
+
+* Send email back to the BMIP author with next steps.
+
+The BMIP editors are intended to fulfill administrative and editorial responsibilities. The BMIP editors monitor BMIP changes, and correct any structure, grammar, spelling, or markup mistakes we see.
+
+
+==BMIP licensing==
+
+===Specification===
+
+New BMIPs may be accepted with the following licenses. Each new BMIP must identify at least one acceptable license in its preamble. The License header in the preamble must be placed after the Created header. Each license must be referenced by their respective abbreviation given below.
+
+For example, a preamble might include the following License header:
+
+    License: BSD-2-Clause
+             GNU-All-Permissive
+
+In this case, the BMIP text is fully licensed under both the OSI-approved BSD 2-clause license as well as the GNU All-Permissive License, and anyone may modify and redistribute the text provided they comply with the terms of *either* license. In other words, the license list is an "OR choice", not an "AND also" requirement.
+
+It is also possible to license source code differently from the BMIP text. A optional License-Code header is placed after the License header. Again, each license must be referenced by their respective abbreviation given below.
+
+For example, a preamble specifying the optional License-Code header might look like:
+
+    License: BSD-2-Clause
+             GNU-All-Permissive
+    License-Code: GPL-2.0+
+
+In this case, the code in the BMIP is not available under the BSD or All-Permissive licenses, but only under the terms of the GNU General Public License (GPL), version 2 or newer.
+If the code were to be available under *only* version 2 exactly, the "+" symbol should be removed from the license abbreviation.
+For a later version (eg, GPL 3.0), you would increase the version number (and retain or remove the "+" depending on intent).
+
+    License-Code: GPL-2.0   # This refers to GPL v2.0 *only*, no later license versions are acceptable.
+    License-Code: GPL-2.0+  # This refers to GPL v2.0 *or later*.
+    License-Code: GPL-3.0   # This refers to GPL v3.0 *only*, no later license versions are acceptable.
+    License-Code: GPL-3.0+  # This refers to GPL v3.0 *or later*.
+
+In the event that the licensing for the text or code is too complicated to express with a simple list of alternatives, the list should instead be replaced with the single term "Complex". In all cases, details of the licensing terms must be provided in the Copyright section of the BMIP.
+
+BMIPs are not required to be *exclusively* licensed under approved terms, and may also be licensed under unacceptable licenses *in addition to* at least one acceptable license.
+In this case, only the acceptable license(s) should be listed in the License and License-Code headers.
+
+====Recommended licenses====
+
+* BSD-2-Clause: [https://opensource.org/licenses/BSD-2-Clause OSI-approved BSD 2-clause license]
+* BSD-3-Clause: [https://opensource.org/licenses/BSD-3-Clause OSI-approved BSD 3-clause license]
+* CC0-1.0: [https://creativecommons.org/publicdomain/zero/1.0/ Creative Commons CC0 1.0 Universal]
+* GNU-All-Permissive: [http://www.gnu.org/prep/maintain/html_node/License-Notices-for-Other-Files.html GNU All-Permissive License]
+
+In addition, it is recommended that literal code included in the BMIP be dual-licensed under the same license terms as the project it modifies. For example, literal code intended for Bytom Core would ideally be dual-licensed under the MIT license terms as well as one of the above with the rest of the BMIP text.
+
+====Not recommended, but acceptable licenses====
+
+* Apache-2.0: [http://www.apache.org/licenses/LICENSE-2.0 Apache License, version 2.0]
+* BSL-1.0: [http://www.boost.org/LICENSE_1_0.txt Boost Software License, version 1.0]
+* CC-BY-4.0: [https://creativecommons.org/licenses/by/4.0/ Creative Commons Attribution 4.0 International]
+* CC-BY-SA-4.0: [https://creativecommons.org/licenses/by-sa/4.0/ Creative Commons Attribution-ShareAlike 4.0 International]
+* MIT: [https://opensource.org/licenses/MIT Expat/MIT/X11 license]
+* AGPL-3.0+: [http://www.gnu.org/licenses/agpl-3.0.en.html GNU Affero General Public License (AGPL), version 3 or newer]
+* FDL-1.3: [http://www.gnu.org/licenses/fdl-1.3.en.html GNU Free Documentation License, version 1.3]
+* GPL-2.0+: [http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html GNU General Public License (GPL), version 2 or newer]
+* LGPL-2.1+: [http://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html GNU Lesser General Public License (LGPL), version 2.1 or newer]
+
+====Not acceptable licenses====
+
+All licenses not explicitly included in the above lists are not acceptable terms for a Bytom Improvement Proposal unless a later BMIP extends this one to add them.
+However, BMIPs predating the acceptance of this BMIP were allowed under other terms, and should use these abbreviation when no other license is granted:
+
+* OPL: [http://opencontent.org/openpub/ Open Publication License, version 1.0]
+* PD: Released into the public domain
+
