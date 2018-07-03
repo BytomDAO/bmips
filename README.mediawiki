@@ -1,6 +1,6 @@
 ==Bytom Improvement Proposals==
 
-Bytom Improvement Proposals (BMIPs) describe standards for the Bytom platform, including core protocol, VM specifications, client APIs  and contract standards.
+Bytom Improvement Proposals (BMIPs) describe standards for the Bytom platform, including core protocol, client APIs, VM specifications and contract standards.
 Having a BMIP here does not make it a formally accepted standard until its status becomes Final or Active.
 
 Those proposing changes should consider that ultimately consent may rest with the consensus of the Bytom users.
