@@ -6,30 +6,23 @@ Having a BMIP here does not make it a formally accepted standard until its statu
 Those proposing changes should consider that ultimately consent may rest with the consensus of the Bytom users.
 
 Review [[BMIP-001.mediawiki|BMIP-001]] and follow the instructions to submit a [https://github.com/bytom/bmip/pulls Pull Request] to this repository.
- 
+
 ==Table of Contents==
 
 {| class="wikitable sortable" style="width: auto; text-align: center; font-size: smaller; table-layout: fixed;"
 !Number
-!Layer
 !Title
 !Owner
 !Type
+!Layer
 !Status
 |- style="background-color: #cfffcf"
 | [[bmip-001.mediawiki|1]]
-|
 | BMIP Purpose and Guidelines
 | Lang Yu
-| Process
-| Active
-|-
-| [[bmip-008.mediawiki|8]]
+| Meta
 |
-| Version bits with lock-in by height
-| Shaolin Fry
-| Informational
-| Draft
+| Active
 |}
 
 <!-- IMPORTANT!  See the instructions at the top of this page, do NOT JUST add BIPs here! -->
