@@ -25,7 +25,7 @@ Review [[bmip-001.mediawiki|BMIP-001]] and follow the instructions to submit a [
 | Active
 |- style="background-color: #cfffcf"
 | [[bmip-0072.mediawiki|72]]
-| BMIP bytom: uri extensions for Payment Protocol
+| bytom: uri extensions for Payment Protocol
 | James Zhu
 | Meta
 | Applications
