@@ -1,0 +1,40 @@
+<pre>
+  BMIP: 72
+  Layer: Applications
+  Title: bytom: uri extensions for Payment Protocol
+  Author: James Zhu <james@bytom.io>
+  Comments-Summary: No comments yet.
+  Comments-URI: https://github.com/bytom/bmips/wiki/Comments:BMIP-072
+  Status: Draft
+  Type: Meta
+  Created: 2018-11-06
+</pre>
+
+==Abstract==
+
+This BIP describes an payment protocol that addresses the need for short URLs when scanning from QR codes.
+
+==Motivation==
+
+The payment protocol augments the bytom: uri scheme with an additional "payment" parameter that specifies a URL where a payment request can be downloaded. This creates long URIs that, when rendered as a QR code, have a high information density. Dense QR codes can be difficult to scan resulting in a more frustrating user experience. The goal is to create a standard that would allow QR scanning wallets to use less dense QR codes.
+
+==Specification==
+
+Url scheme:
+<pre>
+bytom:<address>?amount=<amount>&asset=<asset>&memo=<memo>
+</pre>
+example:
+<pre>
+bytom:bm1q3yt265592czgh96r0uz63ta8fq40uzu5a8c2h0?amount=888&asset=ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff&memo=six_god
+</pre>
+
+{|
+| address || Bytom address for request payment.
+|-
+| asset || Asset ID of the request asset
+|-
+| amount || Number of asset to be paid.
+|-
+| memo || UTF-8 encoded, plain-text note with max length of 64 characters.
+|}
