@@ -12,7 +12,7 @@
 
 ==Abstract==
 
-This BIP describes an payment protocol that addresses the need for short URLs when scanning from QR codes.
+This BIP describes a payment protocol that addresses the need for short URLs when scanning from QR codes.
 
 ==Motivation==
 
@@ -30,11 +30,11 @@ bytom:bm1q3yt265592czgh96r0uz63ta8fq40uzu5a8c2h0?amount=888&asset=ffffffffffffff
 </pre>
 
 {|
-| address || Bytom address for request payment.
+| address || Bytom address for receive payment.
 |-
-| asset || Asset ID of the request asset
+| asset || Asset ID of the payment request asset
 |-
-| amount || Number of asset to be paid.
+| amount || Number of the asset to be paid.
 |-
 | memo || UTF-8 encoded, plain-text note with max length of 64 characters.
 |}
