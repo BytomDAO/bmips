@@ -23,6 +23,13 @@ Review [[bmip-001.mediawiki|BMIP-001]] and follow the instructions to submit a [
 | Meta
 |
 | Active
+|- style="background-color: #cfffcf"
+| [[bmip-0072.mediawiki|72]]
+| bytom: uri extensions for Payment Protocol
+| James Zhu
+| Meta
+| Applications
+| Draft
 |}
 
 <!-- IMPORTANT!  See the instructions at the top of this page, do NOT JUST add BIPs here! -->
