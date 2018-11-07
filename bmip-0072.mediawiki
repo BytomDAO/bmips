@@ -12,7 +12,7 @@
 
 ==Abstract==
 
-This BIP describes a payment protocol that addresses the need for short URLs when scanning from QR codes.
+This BMIP describes a payment protocol that addresses the need for short URLs when scanning from QR codes.
 
 ==Motivation==
 
