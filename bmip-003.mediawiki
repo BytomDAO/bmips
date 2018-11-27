@@ -1,0 +1,327 @@
+<pre>
+  BMIP: 3
+  Layer: Applications
+  Title: bytom: Wallet backup file protocol
+  Author: Yahtoo Ma <yahtoo.ma@gmail.com>
+  Comments-Summary: No comments yet.
+  Comments-URI: https://github.com/bytom/bmips/wiki/Comments:BMIP-003
+  Status: Draft
+  Type: Meta
+  Created: 2018-11-23
+</pre>
+
+==Abstract==
+
+This protocol defines the format of the wallet backup file. The encrypted key information, account information and asset information are stored in the wallet. In order to recover various information in the wallet under abnormal conditions, it is necessary to back up the wallet frequently.
+
+==Motivation==
+
+Define the format of the wallet backup file, which is convenient for backup files to be used between different types of wallets, including multiple encrypted keys, multiple accounts, and multiple asset wallets.
+
+==Specification==
+
+The backup file is in json format, including accountImage, assetImage, and keyImages. It is used to back up accounts, assets, and encrypted key information.
+<pre>
+{
+ "accountImage":{},
+ "assetImage":{},
+ "keyImages":{}
+}
+</pre>
+
+accountImage is used to save account related information in the wallet and can save multiple single-sign and multi-sign accounts. The structure is as follows:
+<pre>
+"account_image": {
+    "slices": [{
+        "account": {
+            "type": "account",
+            "xpubs": ["9f715edcb0b3d023f71ac871e3cc312d6c4de3edef6467eceaf9386746299bf724141d88841aa946ab7560846da535942a6d9186c014e139150b664f696feced"],
+            "quorum": 1,
+            "key_index": 1,
+            "derive_rule": 0,
+            "id": "0IO5R8R9G0A02",
+            "alias": "test"
+        }
+    }
+}
+</pre>
+
+The meaning of each field is as follows:
+{| class="wikitable"
+|-
+|field
+|type
+|meaning
+|-
+|type
+|string
+|Account it represents the contents of the backup account.
+|-
+|xpubs
+|string array
+|Account public key information. 
+|-
+|quorum
+|int
+|The number of public keys of the account, the number of public keys for a single-signal account is 1, and the number of public keys for a multi-signed account is the number of signatures. 
+|-
+|id
+|string
+|Account ID. 
+|-
+|alias
+|string
+|Account alias.
+|-
+|keyIndex
+|int
+|The account index, which represents the index under the public key, is used in the “account” field of the derived path in the hierarchical multi-account wallet.
+|-
+|deriveRule
+|int
+|Account address derived type 0: bip32 account, 1: bip44 account. 
+|}
+
+asset_image saves asset-related information in the wallet. The structure is as follows:
+<pre>
+"asset_image": {
+    "assets": [{
+        "type": "asset",
+        "xpubs": ["9f715edcb0b3d023f71ac871e3cc312d6c4de3edef6467eceaf9386746299bf724141d88841aa946ab7560846da535942a6d9186c014e139150b664f696feced"],
+        "quorum": 1,
+        "key_index": 1,
+        "derive_rule": 0,
+        "id": "7b89f97ad508f87902245ba9a0f2bfcb567917852ca14426bde81e4f096beacd",
+        "alias": "TESTASSET",
+        "vm_version": 1,
+        "issue_program": "ae203fe3779b1fd8380de8f2ff6f9ee30af21541e0375d370a9eb03a788d700856755151ad",
+        "raw_definition_byte": "7b0a202022646563696d616c73223a20382c0a2020226465736372697074696f6e223a207b7d2c0a2020226e616d65223a2022222c0a20202273796d626f6c223a2022220a7d",
+        "definition": {
+            "decimals": 8,
+            "description": {},
+            "name": "",
+            "symbol": ""
+        }
+    }]
+}
+</pre>
+
+{| class="wikitable"
+|-
+|field
+|type
+|meaning
+|-
+|type
+|string
+|asset It represents the contents of the backup asset.
+|-
+|xpubs
+|string array
+|Asset public key information. 
+|-
+|quorum
+|int
+|The number of public keys of the asset, the number of public keys for a single-signal asset is 1, and the number of public keys for a multi-signed asset is the number of signatures. 
+|-
+|key_index
+|int
+|The asset index, which represents the index under the public key, is used in the asset field of the derived path in the hierarchical multi-account wallet.
+|-
+|deriveRule
+|int
+|Asset derive type default 0: bip32. 
+|-
+|id
+|string
+|Asset ID.
+|-
+|alias
+|string
+|Asset alias. 
+|-
+|vm_version
+|int
+|Contract virtual machine version number. 
+|-
+|issue_program
+|string
+|Asset issuance contract.
+|-
+|raw_definition_byte
+|string
+|The asset definition displayed on the blockchain, in JSON format. 
+|-
+|definition
+|struct
+|Relevant asset information entered when the asset is issued. 
+|}
+
+<pre>
+"definition": {
+  "decimals": 8,       //Accuracy of asset units.
+  "description": {},   //Asset description.
+  "name": "",          //Asset name.
+  "symbol": ""         //Asset symbol.
+}
+</pre>
+
+key_images is used to store the encrypted key information in the wallet. The key encryption uses the aes-128-ctr encryption method. The structure is as follows:
+<pre>
+"key_images": {
+    "xkeys": [{
+        "crypto": {
+            "cipher": "aes-128-ctr",
+            "ciphertext": "229b528deeeffcaab685e72ed4406267fb857da69730cc2cbb4a367aea68f2580d8e1bcb22720e093d1dd35f26b92a7f4272d020a79c5baa927c0e75d6fb9f68",
+            "cipherparams": {
+                "iv": "8edf1435
+            },
+            "kdf": "scrypt",
+            "kdfparams": {
+                "dklen": 32,
+                "n": 4096,
+                "p": 6,
+                "r": 8,
+                "salt": "5b3a836fda0c31fca9091c6100bc5825162878b578dc3b8aa3270bf67cde9346"
+            },
+            "mac": "30214ecc382e7dfa40640b538092c868c118f393cfd92d349efcfe4d430139bb"
+        },
+        "id": "d703576f-08ad-4240-8f2b-6e83000146cc",
+        "type": "bytom_kd",
+        "version": 1,
+        "alias": "test",
+        "xpub": "9f715edcb0b3d023f71ac871e3cc312d6c4de3edef6467eceaf9386746299bf724141d88841aa946ab7560846da535942a6d9186c014e139150b664f696feced"
+    }]
+}
+</pre>
+
+{| class="wikitable"
+|-
+|field
+|type
+|meaning
+|-
+|crypto
+|struct
+|Key encryption algorithm and parameters, key encryption uses aes-128-ctr symmetric encryption algorithm.
+|-
+|id
+|string
+|Key id.
+|-
+|type
+|string
+|bytom_kd It represents the contents of the backup key.
+|-
+|version
+|int
+|keyImage version number.
+|-
+|alias
+|string
+|Key alias.
+|-
+|xpub
+|string
+|key XPub.
+|}
+
+crypto The meaning of each field is as follows.
+
+{| class="wikitable"
+|-
+|field
+|meaning
+|-
+|cipher
+|aes-128-ctr for encrypting private keys.
+|-
+|cipherparams
+|aes-128-ctr Parameters required for the encryption algorithm. Here, the only parameter used is iv.
+|-
+|ciphertext
+|The ciphertext output by the encryption algorithm is also the input required for future decryption.
+|-
+|kdf
+|Specify which algorithm to use, currently using scrypt.
+|-
+|kdfparams
+|The |scrypt function required parameters.
+|-
+|mac
+|used to verify the correctness of the password, mac=sha3(DK[16:32], ciphertext), kdf output and ciphertext for SHA3-256 operation.
+|}
+
+The following is an example of a complete testnet wallet backup file:
+<pre>
+{
+	"account_image": {
+		"slices": [{
+			"account": {
+				"type": "account",
+				"xpubs": ["9f715edcb0b3d023f71ac871e3cc312d6c4de3edef6467eceaf9386746299bf724141d88841aa946ab7560846da535942a6d9186c014e139150b664f696feced"],
+				"quorum": 1,
+				"key_index": 1,
+				"derive_rule": 0,
+				"id": "0IO5R8R9G0A02",
+				"alias": "test"
+			}
+		}, {
+			"account": {
+				"type": "account",
+				"xpubs": ["9f715edcb0b3d023f71ac871e3cc312d6c4de3edef6467eceaf9386746299bf724141d88841aa946ab7560846da535942a6d9186c014e139150b664f696feced"],
+				"quorum": 1,
+				"key_index": 2,
+				"derive_rule": 0,
+				"id": "0LFNDSM7G0A02",
+				"alias": "test2"
+			}
+		}]
+	},
+	"asset_image": {
+		"assets": [{
+			"type": "asset",
+			"xpubs": ["9f715edcb0b3d023f71ac871e3cc312d6c4de3edef6467eceaf9386746299bf724141d88841aa946ab7560846da535942a6d9186c014e139150b664f696feced"],
+			"quorum": 1,
+			"key_index": 1,
+			"derive_rule": 0,
+			"id": "7b89f97ad508f87902245ba9a0f2bfcb567917852ca14426bde81e4f096beacd",
+			"alias": "TESTASSET",
+			"vm_version": 1,
+			"issue_program": "ae203fe3779b1fd8380de8f2ff6f9ee30af21541e0375d370a9eb03a788d700856755151ad",
+			"raw_definition_byte": "7b0a202022646563696d616c73223a20382c0a2020226465736372697074696f6e223a207b7d2c0a2020226e616d65223a2022222c0a20202273796d626f6c223a2022220a7d",
+			"definition": {
+				"decimals": 8,
+				"description": {},
+				"name": "",
+				"symbol": ""
+			}
+		}]
+	},
+	"key_images": {
+		"xkeys": [{
+			"crypto": {
+				"cipher": "aes-128-ctr",
+				"ciphertext": "229b528deeeffcaab685e72ed4406267fb857da69730cc2cbb4a367aea68f2580d8e1bcb22720e093d1dd35f26b92a7f4272d020a79c5baa927c0e75d6fb9f68",
+				"cipherparams": {
+					"iv": "8edf14353012fb76d232e27c1c569fb2"
+				},
+				"kdf": "scrypt",
+				"kdfparams": {
+					"dklen": 32,
+					"n": 4096,
+					"p": 6,
+					"r": 8,
+					"salt": "5b3a836fda0c31fca9091c6100bc5825162878b578dc3b8aa3270bf67cde9346"
+				},
+				"mac": "30214ecc382e7dfa40640b538092c868c118f393cfd92d349efcfe4d430139bb"
+			},
+			"id": "d703576f-08ad-4240-8f2b-6e83000146cc",
+			"type": "bytom_kd",
+			"version": 1,
+			"alias": "test",
+			"xpub": "9f715edcb0b3d023f71ac871e3cc312d6c4de3edef6467eceaf9386746299bf724141d88841aa946ab7560846da535942a6d9186c014e139150b664f696feced"
+		}]
+	}
+}
+</pre>
