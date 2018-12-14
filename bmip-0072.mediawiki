@@ -2,7 +2,7 @@
   BMIP: 72
   Layer: Applications
   Title: bytom: uri extensions for Payment Protocol
-  Author: James Zhu <james@bytom.io> Lang Yu <
+  Author: James Zhu <james@bytom.io> Lang Yu <langyu@bytom.io>
   Comments-Summary: No comments yet.
   Comments-URI: https://github.com/bytom/bmips/wiki/Comments:BMIP-072
   Status: Draft
