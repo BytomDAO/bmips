@@ -32,7 +32,7 @@ bytom:bm1q3yt265592czgh96r0uz63ta8fq40uzu5a8c2h0?amount=888&asset=ffffffffffffff
 {|
 | address || Bytom address for receive payment.
 |-
-| asset || Asset ID of the payment request asset
+| asset || Asset ID of the payment request asset. (it can be omitted if asset is native btm)
 |-
 | amount || Number of the asset to be paid.
 |-
