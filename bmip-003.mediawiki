@@ -42,7 +42,7 @@ accountImage is used to save account related information in the wallet and can s
             "id": "0IO5R8R9G0A02",
             "alias": "test"
         }
-    }
+    }]
 }
 </pre>
 
