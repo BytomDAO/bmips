@@ -1,0 +1,42 @@
+<pre>
+  BMIP: 
+  Layer: Contracts
+  Title: Bytom: Standard Signature Verification in Contracts
+  Author: Stieg Li <only4sim@outlook.com>
+  Comments-Summary: No comments yet.
+  Comments-URI: 
+  Status: Draft
+  Type: 
+  Created: 2019-01-17
+</pre>
+
+==Abstract==
+
+This BMIP describes a specification that how to verify signature in contracts.
+
+==Motivation==
+
+This standard will allow signature validity checking in a smart contract. Through a standard function, the contract will be able to establish an association between the blockchain and humans, groups, objects and other external systems. The contract can also trust data submitted by a third party as long as the data is signed by the trusted party. This standard will simplify the implementation of oracles and status channels.
+
+==Specification==
+
+Signature verification function:
+<pre>
+checkStrSig(s,key,sig)
+</pre>
+
+Inputs:
+{|
+| s || The String that was signed.
+|-
+| key || The PublicKey of the Signature.
+|-
+| sig || The Signature of the String.
+|}
+
+Outputs:
+{|
+| true || If Signature is valid.
+|-
+| false || If Signature is invalid.
+
