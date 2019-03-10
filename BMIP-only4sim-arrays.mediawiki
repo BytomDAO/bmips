@@ -24,18 +24,18 @@ Arrays are mutable sequences which are formed by placing a comma-separated list 
 
 Define:
 {|
-| **Type** || **Define** || **Example**
+| Type || Define || Example
 |-
-| Fixed-size array || define identifier : TypeName [Size] = [expr1, expr2, ..., exprSize] || define value : Integer [5] = [amount1, amount2, ..., amount5]
+| Fixed-size array || define identifier : TypeName \[Size\] = \[expr1, expr2, ..., exprSize\] || define value : Integer [5] = [amount1, amount2, ..., amount5]
 |-
-| Dynamically-sized array || define identifier : TypeName [] = [expr1, expr2, ..., exprSize] || define value : Integer [] = [amount1, amount2, ..., amount5]
+| Dynamically-sized array || define identifier : TypeName \[\] = \[expr1, expr2, ..., exprSize\] || define value : Integer [] = [amount1, amount2, ..., amount5]
 |}
 
-**TypeName:** Integer, Amount, Boolean, String, Hash, Asset, PublicKey, Signature, Program.
+TypeName: Integer, Amount, Boolean, String, Hash, Asset, PublicKey, Signature, Program.
 
 Functions:
 {|
-| **Name** || **Meaning**
+| Name || Meaning
 |-
 | length || Yield the length of the array.
 |-
