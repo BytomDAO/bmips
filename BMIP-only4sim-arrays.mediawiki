@@ -22,7 +22,7 @@ This standard will allow arrays in a smart contract. Through a standard type, th
 
 Arrays are mutable sequences which are formed by placing a comma-separated list of expressions in square brackets. The indices of arrays are zero-based and any type of elements can be arrays' elements. 
 
-Define:
+'''Define:'''
 {|
 | '''Type''' || '''Define''' || '''Example'''
 |-
@@ -31,9 +31,9 @@ Define:
 | Dynamically-sized array || define identifier : TypeName <nowiki>[] = [expr1, expr2, ..., exprSize]</nowiki> || define value : Integer <nowiki>[] = [amount1, amount2, ..., amount5]</nowiki>
 |}
 
-TypeName: Integer, Amount, Boolean, String, Hash, Asset, PublicKey, Signature, Program.
+'''TypeName:''' Integer, Amount, Boolean, String, Hash, Asset, PublicKey, Signature, Program.
 
-Functions:
+'''Functions:'''
 {|
 | '''Name''' || '''Meaning'''
 |-
