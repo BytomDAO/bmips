@@ -1,0 +1,48 @@
+<pre>
+  BMIP: 
+  Layer: Contracts
+  Title: Bytom: Arrays in Contracts
+  Author: Stieg Li <only4sim@outlook.com>
+  Comments-Summary: No comments yet.
+  Comments-URI: 
+  Status: Draft
+  Type: 
+  Created: 2019-03-10
+</pre>
+
+==Abstract==
+
+This BMIP describes a specification that how to use arrays in contracts.
+
+==Motivation==
+
+This standard will allow arrays in a smart contract. Through a standard type, the contract will be able to use mutable sequences and process data in batches. This standard will simplify the implementation of complex contracts.
+
+==Specification==
+
+Arrays are mutable sequences which are formed by placing a comma-separated list of expressions in square brackets. The indices of arrays are zero-based and any type of elements can be arrays' elements. 
+
+Define:
+{|
+| **Type** || **Define** || **Example**
+|-
+| Fixed-size array || define identifier : TypeName [Size] = [expr1, expr2, ..., exprSize] || define value : Integer [5] = [amount1, amount2, ..., amount5]
+|-
+| Dynamically-sized array || define identifier : TypeName [] = [expr1, expr2, ..., exprSize] || define value : Integer [] = [amount1, amount2, ..., amount5]
+|}
+
+**TypeName:** Integer, Amount, Boolean, String, Hash, Asset, PublicKey, Signature, Program.
+
+Functions:
+{|
+| **Name** || **Meaning**
+|-
+| length || Yield the length of the array.
+|-
+| push || Removes and Returns the last element in the array.
+|}
+
+==References==
+
+- [Solidity Arrays](https://solidity.readthedocs.io/en/v0.5.5/types.html#arrays)
+- [The Python Tutorial More on Lists](https://docs.python.org/2/tutorial/datastructures.html)
