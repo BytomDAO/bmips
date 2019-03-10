@@ -26,9 +26,9 @@ Define:
 {|
 | '''Type''' || '''Define''' || '''Example'''
 |-
-| Fixed-size array || define identifier : TypeName &[ Size &] = &[ expr1, expr2, ..., exprSize &] || define value : Integer &[ 5 &] = &[ amount1, amount2, ..., amount5 &]
+| Fixed-size array || define identifier : TypeName <nowiki>[Size] = [expr1, expr2, ..., exprSize]</nowiki> || define value : Integer <nowiki>[5] = [amount1, amount2, ..., amount5]</nowiki>
 |-
-| Dynamically-sized array || define identifier : TypeName &[ &] = \[ expr1, expr2, ..., exprSize &] || define value : Integer &[ &] = &[ amount1, amount2, ..., amount5 &]
+| Dynamically-sized array || define identifier : TypeName <nowiki>[] = [expr1, expr2, ..., exprSize]</nowiki> || define value : Integer <nowiki>[] = [amount1, amount2, ..., amount5]</nowiki>
 |}
 
 TypeName: Integer, Amount, Boolean, String, Hash, Asset, PublicKey, Signature, Program.
@@ -44,5 +44,5 @@ Functions:
 
 ==References==
 
-- [https://solidity.readthedocs.io/en/v0.5.5/types.html#arrays Solidity Arrays]
-- [https://docs.python.org/2/tutorial/datastructures.html The Python Tutorial More on Lists]
+* [https://solidity.readthedocs.io/en/v0.5.5/types.html#arrays Solidity Arrays]
+* [https://docs.python.org/2/tutorial/datastructures.html The Python Tutorial More on Lists]
