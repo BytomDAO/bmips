@@ -1,0 +1,105 @@
+<pre>
+  BMIP: 2
+  Layer: Bytom Asset Protocol(BAP)
+  Title: BAP-02 Asset Token Standard  
+  Author: Lang Yu <langyu@bytom.io>
+  Comments-Summary: No comments yet.
+  Comments-URI: https://github.com/bytom/bmips/wiki/Comments:BMIP-0002
+  Status: Draft
+  Type: Standards Track
+  Created: 2019-03-13
+</pre>
+
+==Abstract==
+
+The following proposal allows for the implementation of standard asset tokens in ISSUE-type transactions . This standard provides basic functionality to define asset in chain , as well as a specification for issuers to manage asset by contracts. 
+
+==Motivation==
+
+An asset is a type of value that can be issued on a blockchain. All units of a given asset are fungible.
+
+Each asset has a globally unique asset ID that is derived from an issuance program and asset definition. The issuance program typically defines a set of possible signing keys and a threshold number of signatures that must be provided to authorize issuance of new units of the asset. 
+
+The asset definition consists of arbitrary key-value data committed to the blockchain for all participants to see
+
+The standard gives users a simple way to issue asset . It allows any token met the standard on Bytom to be easily supported by other applications: from wallets,  explorer to exchanges.
+
+An example might be a merchant can list token in their bussiness in a very short time. 
+
+==Specification==
+
+===Asset Definition===
+
+The following specifications use syntax of standard JSON schema
+
+====name====
+
+Define the name of the token - e.g. <code>MyAsset</code>. 
+
+Note:  string shoud be less than 30 characters.
+
+====symbol====
+Define the symbol of the token - e.g. <code>BAT</code>
+
+Note:  symbols must be made up of uppercase letters,  3 or 4 letters is better.
+====decimals====
+
+Define the number of decimals the token uses - e.g. <code>8</code>, means to divide the token amount by <code>100000000</code> to get its user representation.
+
+====quorum====
+
+Define the threshold number of the possible signing keys that must sign a transaction to issue units of this token.
+
+====reissue====
+
+Define the flag whether asset can be issued more than once - e.g. <code>True</code> means additional issue is allowed in the future, <code>False</code>otherwise
+
+Note: this flag only works in collaboration with specific issuance program.
+
+====description====
+
+Include an asset description consisting of arbitrary key-value data - e.g. <code>{"Email":"foo@bar.com"}</code>
+
+
+
+===Issuance Program===
+
+Bytom automatically creates the issuance program with smart contract  when the asset is created. The issuer can issue as many units as they want, as many times as they want.  custom issuance programs are possible that enforce further limits on when, whether, and by whom new units may be issued.
+
+NOTE: The following snippets haven been written in  Equity <code>0.1.1</code> (or above) . 
+We propose Issuance Program with no limit and at least  2 signing keys.
+
+<pre>
+contract  IssueAsset(publicKey1: PublicKey,
+                     publicKey2: PublicKey,
+                     publicKey3: PublicKey) locks valueAmount of valueAsset 
+{
+	clause spend(sig1: Signature, sig2: Signature) {
+		verify checkTxMultiSig([publicKey1, publicKey2, publicKey3], [sig1, sig2])
+		unlock valueAmount of valueAsset
+	}
+}
+</pre>
+Issuance Program will be inactive after certain block height by adding the <code>limitHeight</code> parameter.
+
+<pre>
+contract IssueAssetWithLimit(publicKey1: PublicKey,
+                             publicKey2: PublicKey,
+                             publicKey3: PublicKey,
+                             limitHeight: Integer) locks valueAmount of valueAsset 
+{
+	clause spend(sig1: Signature, sig2: Signature, limitHeight: Integer) {
+		verify below(limitHeight)
+		verify checkTxMultiSig([publicKey1, publicKey2, publicKey3], [sig1, sig2])
+		unlock valueAmount of valueAsset
+  	}
+}
+</pre>
+
+==Implementation==
+
+TO BE DONE
+
+==Copyright==
+
+This document is placed in the public domain.
