@@ -16,7 +16,7 @@ This BMIP describes a specification that how to use arrays in contracts.
 
 ==Motivation==
 
-This standard will allow arrays in a smart contract. Through a standard type, the contract will be able to use mutable sequences and process data in batches. This standard will simplify the implementation of complex contracts.
+Bytom aims to be an interactive protocol of multiple byte assets, which can benefit bonds, notes, contracts, and decentralized exchanges. However, current contracts do not support array type, which means that even the same type of data cannot be batch processed within a contract. For example, even for a bond, each investor needs to generate a new contract. This standard will allow arrays in a smart contract. Through a standard type, the contract will be able to use mutable sequences. This standard will simplify the implementation of contracts, and help achieve Turing complet of the equity.
 
 ==Specification==
 
@@ -26,9 +26,9 @@ Arrays are mutable sequences which are formed by placing a comma-separated list 
 {|
 | '''Type''' || '''Define''' || '''Example'''
 |-
-| Fixed-size array || define identifier : TypeName <nowiki>[Size] = [expr1, expr2, ..., exprSize]</nowiki> || define value : Integer <nowiki>[5] = [amount1, amount2, ..., amount5]</nowiki>
+| Fixed-size array || <pre> define identifier : TypeName [Size] = [expr1, expr2, ..., exprSize]</pre> || <pre> define value : Integer <nowiki>[5] = [amount1, amount2, ..., amount5]</pre>
 |-
-| Dynamically-sized array || define identifier : TypeName <nowiki>[] = [expr1, expr2, ..., exprSize]</nowiki> || define value : Integer <nowiki>[] = [amount1, amount2, ..., amount5]</nowiki>
+| Dynamically-sized array || <pre> define identifier : TypeName [] = [expr1, expr2, ..., exprSize]</pre> || <pre> define value : Integer <nowiki>[] = [amount1, amount2, ..., amount5]</pre>
 |}
 
 '''TypeName:''' Integer, Amount, Boolean, String, Hash, Asset, PublicKey, Signature, Program.
@@ -41,6 +41,15 @@ Arrays are mutable sequences which are formed by placing a comma-separated list 
 |-
 | push || Removes and Returns the last element in the array.
 |}
+
+==Application==
+This BMIP could be wildly used in bonds, games, asset management and decentralized exchanges.
+
+'''Example:'''
+<pre>
+//Define the remaining amount of the six bonds.
+define reAmount : Integer [6] = [100, 24, 55, 19, 90, 36]
+</pre>
 
 ==References==
 
