@@ -31,7 +31,6 @@ Review [[bmip-0001.mediawiki|BMIP-001]] and follow the instructions to submit a 
 | Standards Track
 | Bytom Asset Protocol (BAP)
 | Draft
-| 
 |- style="background-color: #cfffcf"
 | [[bmip-0072.mediawiki|72]]
 | bytom: uri extensions for Payment Protocol
