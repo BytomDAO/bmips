@@ -23,6 +23,14 @@ Review [[bmip-0001.mediawiki|BMIP-001]] and follow the instructions to submit a 
 | Meta
 |
 | Active
+
+|- style="background-color: #cfffcf"
+| [[bmip-0002.mediawiki|2]]
+| Asset Token Standard 
+| Lang Yu
+| Standards Track
+| Bytom Asset Protocol (BAP)
+| Draft
 |- style="background-color: #cfffcf"
 | [[bmip-0072.mediawiki|72]]
 | bytom: uri extensions for Payment Protocol
