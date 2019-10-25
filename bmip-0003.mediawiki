@@ -1,0 +1,55 @@
+<pre>
+  BMIP: 3
+  Layer: Bytom Asset Protocol(BAP)
+  Title: Other Chain Asset Token Standard
+  Author: mars <mars@bytom.io> James Zhu <james@bytom.io> Lang Yu <langyu@bytom.io>
+  Comments-Summary: No comments yet.
+  Comments-URI: https://github.com/bytom/bmips/wiki/Comments:BMIP-0003
+  Status: Draft
+  Type: Standards Track
+  Created: 2019-10-25
+</pre>
+
+==Abstract==
+
+The following proposal is based on BMIP-0002. This standard provides asset definitions of other chain assets on Bytom
+
+==Motivation==
+
+In order to support the standard definition of the assets of other chains on Bytom, the identification is added based on the JSON format defined by BMIP-0002.
+
+==Specification==
+
+===Asset Definition===
+
+The following specifications use syntax of standard JSON schema
+
+Add 5 identifiers to the description in JSON format of BMIP-0002 asset definition
+
+====description====
+
+Include an asset description consisting of arbitrary key-value data - e.g. <code>{"Email":"foo@bar.com"}</code>
+
+=====chain_id=====
+
+标识链的唯一性，内容格式：ID+federationSig+openFederationSig 。对内容进行hash得到chain_id。
+
+ID参考BIP44的的coin编码
+
+签名的内容是指定高度的blockhash
+
+=====genesis_hash=====
+
+主链创世块hash，分叉链是分叉后第一个区块的hash
+
+=====federation_public_keys=====
+
+在bytom上发行资产的主链联邦地址的公钥
+
+=====require_sign_quorum=====
+
+主链上联邦签名的个数
+
+=====issue_asset_action=====
+
+资产是什么行为发行的资产，如果等于cross_chain表示是其他主链在bytom上发送的资产，在vapor上验证交易时验证是否开放网关的签名
