@@ -26,11 +26,11 @@ URI Scheme:
 
 Comments: 
 
-(a)"ppk:btm" is the root ODIN that had been registered by Bytom project.  
+(a)"ppk:btm" is the root ODIN that had been registered by Bytom project.
  
-(b)"asset" is second-level extension identifier witch means the asset namespace.  
+(b)"asset" is second-level extension identifier witch means the asset namespace.
 
-(c)"SYMBOL" is the specific asset symbol which is issued on Bytom main-chain.(All letters need to be capitalized)  
+(c)"SYMBOL" is the specific asset symbol which is issued on Bytom main-chain.(All letters need to be capitalized)
     
 Examples: 
 
@@ -91,9 +91,10 @@ Then we can use the API URI as follows to get the definition information of the 
   ppk:bystack/mov/asset/USDT/metadata()#   
 
 In the response, provide the following attribute fields which describe the relationship to the asset on Bytom main-chain.
-"cross_related_uris" : {  
-  "ppk:btm/asset/USDT/" : {"in":true,"out":true}  
-}   
+
+"cross_related_uris" : {
+  "ppk:btm/asset/USDT/" : {"in":true,"out":true}
+}
    
 Comments:
   (a)"in" : Whether support cross-chain transfer into side-chain; 
