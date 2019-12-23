@@ -120,8 +120,8 @@ In the response, provide the following attribute fields which describe the relat
   } 
 
 Comments:
-  (a)"in" : Whether support cross-chain transfer into side-chain; 
-  (b)"out": Whether support cross-chain transfer out of side-chain;
+  (a)"in" : Whether support cross-chain transfer in; 
+  (b)"out": Whether support cross-chain transfer out;
   (c)The definition can be further extended to include more informations for cross-chain transaction.   
 
 Similarly, the asset issued on the Bytom can carry the relationship to the asset on other chains too. Then the application can easily judge and process the cross-chain transaction of assets between different chains by the unique naming protocol defined here.
