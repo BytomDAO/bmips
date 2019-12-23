@@ -16,21 +16,24 @@ Based the cross-chain design of the Bytom project, we can establish a unique nam
 2.Specification
 ================
 2.1 Naming Scheme
+
 The unique naming scheme of Bytom asset is based the ODIN scheme(https://ppkpub.github.io/docs/English/EN_PPK_ODIN.txt) . 
 The detail is as follows: 
 
 URI Scheme:
 
-ppk:btm/asset/[SYMBOL]/
-    
+  ppk:btm/asset/[SYMBOL]/
+
 Comments: 
-"ppk:btm" is the root ODIN that had been registered by Bytom project. 
-"asset" is second-level extension identifier witch means the asset namespace.
-"SYMBOL" is the specific asset symbol which is issued on Bytom main-chain.(All letters need to be capitalized)
+
+  "ppk:btm" is the root ODIN that had been registered by Bytom project. 
+  "asset" is second-level extension identifier witch means the asset namespace.
+  "SYMBOL" is the specific asset symbol which is issued on Bytom main-chain.(All letters need to be capitalized)
     
 Examples: 
-ppk:btm/asset/BHT/
-ppk:btm/asset/USDT/
+
+  ppk:btm/asset/BHT/
+  ppk:btm/asset/USDT/
 
 Special case:
     For the Bytom coin, it is specifically defined as "ppk:btm/" witch is different from other assets.
