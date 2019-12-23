@@ -40,8 +40,8 @@ While creating a new asset of the Bytom main-chain, the entered asset symbol is 
 
 2.3 The information and transaction service interfaces related to the Bytom asset 
 
-Based the Bytom Asset Protocol(BAP02, https://github.com/Bytom/bmips/blob/master/bmip-0002.mediawiki)ï¼Œ
-and the PPk Application Protocol(PTAP02,https://github.com/ppkpub/docs/tree/master/PTAP/PPK_PTAP_02.txt)ï¼Œ
+Based the Bytom Asset Protocol(BAP02, https://github.com/Bytom/bmips/blob/master/bmip-0002.mediawiki)£¬
+and the PPk Application Protocol(PTAP02,https://github.com/ppkpub/docs/tree/master/PTAP/PPK_PTAP_02.txt)£¬
 we can use the naming scheme to define Bytom application interface standards like ERC20/ERC721 of Ethereum.
 
 Here is an example of getting the USDT asset definition information issued on the Bytom main-chain.
@@ -51,7 +51,7 @@ API URI:
   ppk:btm/asset/USDT/metadata()#   
 
 Return:
-  JSON Stringï¼Œfor example:
+  JSON String£¬for example:
   {
    "name":"USDT",   //the name of the token.(string shoud be less than 30 characters)
    "symbol":"USDT", //symbol code.(all letters need to be capitalized)
@@ -122,7 +122,7 @@ Similarly, the asset issued on the Bytom can carry the relationship to the asset
 We can query the issued assets on the Bytom main-chain by the following API, then extract and save the basic asset identification data required by the naming system.
     https://blockmeta.com/api/v3/list-asset?page=1&limit=100
 
-Then we can implement the related asset service interfaces by PPk Transfer Protoclï¼ˆPTTP, https://github.com/ppkpub/docs/blob/master/PPK_PTTP_SPEC.txtï¼‰.
+Then we can implement the related asset service interfaces by PPk Transfer Protocl£¨PTTP, https://github.com/ppkpub/docs/blob/master/PPK_PTTP_SPEC.txt£©.
 
 Reference source code:
      https://github.com/ppkpub/AP/tree/master/php2_coin_api
