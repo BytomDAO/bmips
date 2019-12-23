@@ -1,1 +1,136 @@
-BMIP: 775Layer: Bytom Asset Protocol(BAP)Title: Bytom Asset Naming Standard  Author: PPk community <ppkpub@gmail.com>Comments-Summary: No comments yet.Comments-URI: Status: DraftType: Standards TrackCreated: 2019-12-231.Abstract===========Based the cross-chain design of the Bytom project, we can establish a unique naming system based blockchain for the Bytom asset, by integrating the symbol of the asset that issued on the Bytom main-chain with the ODIN naming protocol from the PPk community. Further more, we can define and implement the universal interfaces such as the asset information and transaction services  ,  which would  help the development of new digital asset applications across the Bytom main-chain,Bystack side-chains and more other chains and platforms.2.Specification================2.1 Naming SchemeThe unique naming scheme of Bytom asset is based the ODIN scheme(https://ppkpub.github.io/docs/English/EN_PPK_ODIN.txt).  The detail is as follows: URI Scheme:  ppk:btm/asset/[SYMBOL]/Comments:   "ppk:btm" is the root ODIN that had been registered by Bytom project.     "asset" is second-level extension identifier witch means the asset namespace.    "SYMBOL" is the specific asset symbol which is issued on Bytom main-chain.(All letters need to be capitalized)      Examples:   ppk:btm/asset/BHT/  ppk:btm/asset/USDT/Special case:  For the Bytom coin, it is specifically defined as "ppk:btm/" witch is different from other assets.2.2 Duplicate asset symbol conflictWhile creating a new asset of the Bytom main-chain, the entered asset symbol is only checked on the client node, and there is no check on the main-chain for duplicates. Therefore, the naming specification defines here that the first transaction record issued on the chain shall own the symbol code.2.3 The information and transaction service interfaces related to the Bytom asset Based the Bytom Asset Protocol(BAP02, https://github.com/Bytom/bmips/blob/master/bmip-0002.mediawiki),and the PPk Application Protocol(PTAP02,https://github.com/ppkpub/docs/tree/master/PTAP/PPK_PTAP_02.txt),we can use the naming scheme to define Bytom application interface standards like ERC20/ERC721 of Ethereum.Here is an example of getting the USDT asset definition information issued on the Bytom main-chain.Refer it, we can define more interfaces.API URI:  ppk:btm/asset/USDT/metadata()#   Return:  JSON String,for example:  {   "name":"USDT",   //the name of the token.(string shoud be less than 30 characters)   "symbol":"USDT", //symbol code.(all letters need to be capitalized)   "type":"token",  //asset type(selectable value is coin and token)   "native_id":"4483893ef7d......69a6f5703", //the orginal asset ID on the chain.   "base_coin_uri":"ppk:btm/", //the base coin identifier for carrying the token.     "total_supply": "100000000000000"  ,  //supply, the unit is the smallest like satoshi. use string to avoid too large numbers. Optional   "base_miner_fee":100000,  //Minimum miner cost, integer, the unit is the smallest like satoshi.   "min_transfer_amount":100000,  //Minimum transfer amount, integer, the unit is the smallest like satoshi.   "decimals" : 8, // the number of decimal places for the smallest unit like satoshi    "logo":"",  //Default icon URL   "quorum":1,  //Define the threshold number of the possible signing keys that must sign a transaction to issue units of this token.   "issue_timestamp":1524499200, //issued time   "is_bap2":true,  //whether is a BAP2-compliant asset.   "reissue":"true", //define the flag whether asset can be issued more than once   "description":"", //include an asset description consisting of arbitrary key-value data - e.g. {"Email":"foo@bar.com"}   "issuance_program":null,  //related issued program ID   "decode_program":null,  //related decode program ID   "tx_explorer_url":"https://blockmeta.com/tx/"        //suggested  service for querying transaction.  }2.4 Support the Bystack side-chainThe Bystack side-chain can register the root ODIN by own, and then define the extended identifier specifically for the asset on side-chain, which can carry the relationship to the asset on Bytom main-chain.For example:Suppose an ODIN identifier of a Bystack side-chain is "ppk:bystack/mov/" .Define the extended identifier specifically for the asset on side-chain such as "ppk:bystack/mov/asset/USDT/" .Then we can use the API URI as follows to get the definition information of the asset on side-chain :  ppk:bystack/mov/asset/USDT/metadata()#   In the response, provide the following attribute fields which describe the relationship to the asset on Bytom main-chain.  "cross_related_uris" : {    "ppk:btm/asset/USDT/" : {"in":true,"out":true}  }    Comments:  (a)"in" : Whether support cross-chain transfer into side-chain;   (b)"out": Whether support cross-chain transfer out of side-chain;  (c)The definition can be further extended to include more informations for cross-chain transaction.The application can check the native_id in the asset definition by the identifiers between the main-chain and side-chain, which would help to avoid the risk of incorrect or fake asset.2.5 Support the other blockchainsOther chains can register the root ODIN by own, and then define the extended identifier specifically for the asset on it, which can carry the relationship to the asset on Bytom main-chain.For example:Suppose an ODIN identifier of one Ethereum is "ppk:eth/" .Define the extended identifier specifically for the ERC20 asset on Ethereum such as "ppk:eth/erc20/USDT" .Then we can use the API URI as follows to get the definition information of the asset on Ethereum :  ppk:eth/erc20/USDT/metadata()#   In the response, provide the following attribute fields which describe the relationship to the asset on Bytom main-chain or Bystack side-chains.  "cross_related_uris" : {     "ppk:btm/asset/USDT/" : {"in":true,"out":true},     "ppk:bystack/mov/asset/USDT/" : {"in":true,"out":true}  } Comments:  (a)"in" : Whether support cross-chain transfer into side-chain;   (b)"out": Whether support cross-chain transfer out of side-chain;  (c)The definition can be further extended to include more informations for cross-chain transaction.   Similarly, the asset issued on the Bytom can carry the relationship to the asset on other chains too. Then the application can easily judge and process the cross-chain transaction of assets between different chains by the unique naming protocol defined here.   3. Implementation==================We can query the issued assets on the Bytom main-chain by the following API, then extract and save the basic asset identification data required by the naming system.   https://blockmeta.com/api/v3/list-asset?page=1&limit=100Then we can implement the related asset service interfaces by PPk transfer protocol(PTTP, https://github.com/ppkpub/docs/blob/master/PPK_PTTP_SPEC.txt).Reference source code:https://github.com/ppkpub/AP/tree/master/php2_coin_api  
+BMIP: 775
+Layer: Bytom Asset Protocol(BAP)
+Title: Bytom Asset Naming Standard  
+Author: PPk community <ppkpub@gmail.com>
+Comments-Summary: No comments yet.
+Comments-URI: 
+Status: Draft
+Type: Standards Track
+Created: 2019-12-23
+
+
+1.Abstract
+===========
+Based the cross-chain design of the Bytom project, we can establish a unique naming system based blockchain for the Bytom asset, by integrating the symbol of the asset that issued on the Bytom main-chain with the ODIN naming protocol from the PPk community. Further more, we can define and implement the universal interfaces such as the asset information and transaction services  ,  which would  help the development of new digital asset applications across the Bytom main-chain,Bystack side-chains and more other chains and platforms.
+
+2.Specification
+================
+2.1 Naming Scheme
+
+The unique naming scheme of Bytom asset is based the ODIN scheme(https://ppkpub.github.io/docs/English/EN_PPK_ODIN.txt).  
+The detail is as follows: 
+
+URI Scheme:
+
+  ppk:btm/asset/[SYMBOL]/
+
+Comments: 
+
+  "ppk:btm" is the root ODIN that had been registered by Bytom project.   
+  "asset" is second-level extension identifier witch means the asset namespace.  
+  "SYMBOL" is the specific asset symbol which is issued on Bytom main-chain.(All letters need to be capitalized)  
+    
+Examples: 
+
+  ppk:btm/asset/BHT/
+  ppk:btm/asset/USDT/
+
+Special case:
+
+  For the Bytom coin, it is specifically defined as "ppk:btm/" witch is different from other assets.
+
+2.2 Duplicate asset symbol conflict
+
+While creating a new asset of the Bytom main-chain, the entered asset symbol is only checked on the client node, and there is no check on the main-chain for duplicates. Therefore, the naming specification defines here that the first transaction record issued on the chain shall own the symbol code.
+
+2.3 The information and transaction service interfaces related to the Bytom asset 
+
+Based the Bytom Asset Protocol(BAP02, https://github.com/Bytom/bmips/blob/master/bmip-0002.mediawiki),
+and the PPk Application Protocol(PTAP02,https://github.com/ppkpub/docs/tree/master/PTAP/PPK_PTAP_02.txt),
+we can use the naming scheme to define Bytom application interface standards like ERC20/ERC721 of Ethereum.
+
+Here is an example of getting the USDT asset definition information issued on the Bytom main-chain.
+Refer it, we can define more interfaces.
+
+API URI:
+  ppk:btm/asset/USDT/metadata()#   
+
+Return:
+  JSON String,for example:
+  {
+   "name":"USDT",   //the name of the token.(string shoud be less than 30 characters)
+   "symbol":"USDT", //symbol code.(all letters need to be capitalized)
+   "type":"token",  //asset type(selectable value is coin and token)
+   "native_id":"4483893ef7d......69a6f5703", //the orginal asset ID on the chain.
+   "base_coin_uri":"ppk:btm/", //the base coin identifier for carrying the token.  
+   "total_supply": "100000000000000"  ,  //supply, the unit is the smallest like satoshi. use string to avoid too large numbers. Optional
+   "base_miner_fee":100000,  //Minimum miner cost, integer, the unit is the smallest like satoshi.
+   "min_transfer_amount":100000,  //Minimum transfer amount, integer, the unit is the smallest like satoshi.
+   "decimals" : 8, // the number of decimal places for the smallest unit like satoshi 
+   "logo":"",  //Default icon URL
+   "quorum":1,  //Define the threshold number of the possible signing keys that must sign a transaction to issue units of this token.
+   "issue_timestamp":1524499200, //issued time
+   "is_bap2":true,  //whether is a BAP2-compliant asset.
+   "reissue":"true", //define the flag whether asset can be issued more than once
+   "description":"", //include an asset description consisting of arbitrary key-value data - e.g. {"Email":"foo@bar.com"}
+   "issuance_program":null,  //related issued program ID
+   "decode_program":null,  //related decode program ID
+   "tx_explorer_url":"https://blockmeta.com/tx/"        //suggested  service for querying transaction.
+  }
+
+2.4 Support the Bystack side-chain
+
+The Bystack side-chain can register the root ODIN by own, and then define the extended identifier specifically for the asset on side-chain, which can carry the relationship to the asset on Bytom main-chain.
+
+For example:
+Suppose an ODIN identifier of a Bystack side-chain is "ppk:bystack/mov/" .
+Define the extended identifier specifically for the asset on side-chain such as "ppk:bystack/mov/asset/USDT/" .
+Then we can use the API URI as follows to get the definition information of the asset on side-chain :
+  ppk:bystack/mov/asset/USDT/metadata()#   
+
+In the response, provide the following attribute fields which describe the relationship to the asset on Bytom main-chain.
+
+  "cross_related_uris" : {
+    "ppk:btm/asset/USDT/" : {"in":true,"out":true}
+  } 
+   
+Comments:
+  (a)"in" : Whether support cross-chain transfer into side-chain; 
+  (b)"out": Whether support cross-chain transfer out of side-chain;
+  (c)The definition can be further extended to include more informations for cross-chain transaction.
+
+The application can check the native_id in the asset definition by the identifiers between the main-chain and side-chain, which would help to avoid the risk of incorrect or fake asset.
+
+2.5 Support the other blockchains
+
+Other chains can register the root ODIN by own, and then define the extended identifier specifically for the asset on it, which can carry the relationship to the asset on Bytom main-chain.
+
+For example:
+Suppose an ODIN identifier of one Ethereum is "ppk:eth/" .
+Define the extended identifier specifically for the ERC20 asset on Ethereum such as "ppk:eth/erc20/USDT" .
+Then we can use the API URI as follows to get the definition information of the asset on Ethereum :
+  ppk:eth/erc20/USDT/metadata()#   
+
+In the response, provide the following attribute fields which describe the relationship to the asset on Bytom main-chain or Bystack side-chains.
+  "cross_related_uris" : {
+     "ppk:btm/asset/USDT/" : {"in":true,"out":true},
+     "ppk:bystack/mov/asset/USDT/" : {"in":true,"out":true}
+  } 
+
+Comments:
+  (a)"in" : Whether support cross-chain transfer into side-chain; 
+  (b)"out": Whether support cross-chain transfer out of side-chain;
+  (c)The definition can be further extended to include more informations for cross-chain transaction.   
+
+Similarly, the asset issued on the Bytom can carry the relationship to the asset on other chains too. Then the application can easily judge and process the cross-chain transaction of assets between different chains by the unique naming protocol defined here.
+   
+3. Implementation
+==================
+We can query the issued assets on the Bytom main-chain by the following API, then extract and save the basic asset identification data required by the naming system.
+   https://blockmeta.com/api/v3/list-asset?page=1&limit=100
+
+Then we can implement the related asset service interfaces by PPk transfer protocol(PTTP, https://github.com/ppkpub/docs/blob/master/PPK_PTTP_SPEC.txt).
+
+Reference source code:
+https://github.com/ppkpub/AP/tree/master/php2_coin_api
+  
