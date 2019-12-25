@@ -1,0 +1,106 @@
+﻿BMIP: 775
+Layer: Bytom Asset Protocol(BAP)
+Title: Bytom Asset Naming Standard  
+Author: PPkPub <ppkpub@gmail.com>
+Comments-Summary: No comments yet.
+Comments-URI: 
+Status: Draft
+Type: Standards Track
+Created: 2019-12-23
+
+1.概要(Abstract)
+
+结合比原主侧链的资产跨链机制，基于主链资产的资产代号(symbol)，结合PPk社区的ODIN标识来建立一个比原资产唯一命名标识体系，关联定义和实现资产相关信息和交易服务接口，以方便开发跨比原主侧链、跨其它链和平台的新型数字资产应用。
+
+
+2.规范(Specification)
+
+2.1 命名标识定义
+结合PPk社区的ODIN标识来建立一个比原资产唯一命名标识体系，格式定义如下：
+    ppk:btm/asset/[SYMBOL]/
+其中 
+    ppk:btm为比原已经注册拥有的根标识前缀；
+    asset为二级扩展标识，对应资产命名空间；
+    SYMBOL对应自行发布的具体资产，取值为在比原主链发行时所输入的资产代号, 英文字母需采用大写。
+举例： 
+    ppk:btm/asset/BHT/
+    ppk:btm/asset/USDT/
+
+注：对于比原币，特别定义标识为 ppk:btm/ ，以区分于其它资产
+
+2.2 重名冲突解决方案
+因为在比原主链新建资产时，所输入的资产代号(symbol)只在客户端体现，并不在链上检查是否存在重复，所以此处定义的命名标识规范明确，遇到重复代号的资产，以第一个在链上发行(issue)的交易记录为准，先发行先拥有。
+
+2.3 通过命名标识所提供的比原主链资产相关信息和交易服务接口
+可参考比原资产协议BAP2(https://github.com/Bytom/bmips/blob/master/bmip-0002.mediawiki)，
+结合PPk应用扩展协议PTAP02(https://github.com/ppkpub/docs/tree/master/PTAP/PPK_PTAP_02.txt)，
+进一步定义类似ERC20/ERC721的应用服务接口标准，
+这里以获取比原主链上发行的USDT资产定义数据举例如下，可参考以进一步扩充定义：
+
+接口URI：
+  ppk:btm/asset/USDT/metadata()#   
+
+返回结果：
+  JSON字符串，说明示例如下：
+  {
+   "name":"USDT",  //币种显示缺省名称，一般为英文
+   "symbol":"USDT",    //币种代号，英文字母需大写
+   "type":"token",  //类型，可选取值为coin，token
+   "native_id":"4483893ef7d......69a6f5703", //对应的链上资产ID
+   "base_coin_uri":"ppk:btm/", //对于token需要填写对应的基础币种标识  
+   "total_supply": "100000000000000"  ,  //供应量,以类似satoshi的最小单位,采用字符串避免大数问题，可选
+   "min_transfer_amount":100000,  //最小转账金额，整数，以类似satoshi的最小单位
+   "decimals":8, //由类似satoshi的最小单位换算到标准单位的小数位数 ，如1BTM换算最小单位的小数位数为8
+   
+   "logo":"",  //默认图标网址
+   "quorum":1,  //交易签名门限
+   "issue_timestamp":1524499200, //发行时间
+   "is_bap2":true,  //是否为符合BAP2规范的资产
+   "reissue":"true", //是否可以重复发行
+   "description":"Bytom Official USDT", //更多说明
+   "issuance_program":null,  //关联的发行合约地址
+   "decode_program":null,  //关联的解码合约地址
+
+   "tx_explorer_url":"https://blockmeta.com/tx/"        //建议的交易查询地址前缀
+  }
+
+2.4 命名标识对比原侧链的支持方案
+比原侧链可以自行注册和拥有ODIN根标识，再具体定义扩展标识，并在扩展标识涉及比原资产时，对应关联主链资产标识中的资产ODIN标识。
+
+例如：
+假设MOV侧链的ODIN标识为 ppk:bystack/mov/
+则可以定义该侧链上的USDT资产对应扩展标识为 ppk:bystack/mov/asset/USDT 
+并在其资产定义数据结构中，提供下述属性字段，来说明其相关的主链资产标识：
+   "cross_related_uris" : {
+        "ppk:btm/asset/USDT/" : {"in":true,"out":true}
+   } 
+注：
+1."in"表示是否支持跨链转入，"out"表示是否支持跨链转出；
+2.可以进一步扩充定义涉及跨链交易的更多信息。
+
+应用就可以检查主侧链相关资产标识信息中的native_id，并确保一致，避免出错或伪造风险。
+
+2.5 命名标识对其它链的支持方案
+其它链可以自行注册和拥有ODIN根标识，再具体定义其链上资产对应的扩展标识，并在涉及比原资产时，对应关联比原资产的ODIN标识。
+
+例如：
+假设以太坊链的ODIN标识为 ppk:eth/
+则可以定义以太坊链上的USDT资产对应扩展标识为 ppk:eth/erc20/USDT 
+并在其资产定义数据结构中，提供下述属性字段，来说明其关联的比原主侧链上的资产标识：
+   "cross_related_uris" : {
+        "ppk:btm/asset/USDT/" : {"in":true,"out":true},
+    	"ppk:bystack/mov/asset/USDT/" : {"in":true,"out":true}
+   }
+注：
+1."in"表示是否支持跨链转入，"out"表示是否支持跨链转出；
+2.可以进一步扩充定义涉及跨链交易的更多信息。
+
+同样的，在比原链上也可以关联其它链上的资产标识，这样应用就可以很方便地判断不同链间资产的相关性。
+   
+3 实现（Implementation）
+可以通过下述API接口来查询比原主链上已发行的资产，并提取和保存命名标识体系所需的资产标识基础数据。
+https://blockmeta.com/api/v3/list-asset?page=1&limit=100
+
+然后按PPk对等可信传输协议PTTP（https://github.com/ppkpub/docs/blob/master/PPK_PTTP_SPEC.txt）来实现相关的资产服务接口。
+参考源码实现案例：https://github.com/ppkpub/AP/tree/master/php2_coin_api
+  
