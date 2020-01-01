@@ -43,7 +43,7 @@ Special case:
 
 2.2 Duplicate asset symbol conflict
 
-While creating a new asset of the Bytom main-chain, the entered asset symbol is only checked on the client node, and there is no check on the main-chain for duplicates. Therefore, the naming specification defines here that the first transaction record issued on the chain shall own the symbol code.
+While creating a new asset of the Bytom main-chain, the entered asset symbol is only checked on the client node, and there is no check on the main-chain for duplicates. Therefore, the naming specification defines here that the first transaction record issued on the chain shall own the unique symbol code. and the latter assets would use the HASH ID as it's unique symbol in the ODIN name.
 
 2.3 The information and transaction service interfaces related to the Bytom asset 
 
@@ -72,6 +72,7 @@ Return:
    "logo":"",  //Default icon URL
    "quorum":1,  //Define the threshold number of the possible signing keys that must sign a transaction to issue units of this token.
    "issue_timestamp":1524499200, //issued time
+   "address_count":"12566", //The address counter of holders
    "is_bap2":true,  //whether is a BAP2-compliant asset.
    "reissue":"true", //define the flag whether asset can be issued more than once
    "description":"", //include an asset description consisting of arbitrary key-value data - e.g. {"Email":"foo@bar.com"}
