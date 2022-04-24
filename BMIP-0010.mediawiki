@@ -1,0 +1,57 @@
+<pre>
+  BMIP: 10
+  Layer: Contracts
+  Title: Bytom: Arrays in Contracts
+  Author: Stieg Li <only4sim@outlook.com>
+  Comments-Summary: No comments yet.
+  Comments-URI: 
+  Status: Draft
+  Type: 
+  Created: 2019-03-10
+</pre>
+
+==Abstract==
+
+This BMIP describes a specification that how to use arrays in contracts.
+
+==Motivation==
+
+Bytom aims to be an interactive protocol of multiple byte assets, which can benefit bonds, notes, contracts, and decentralized exchanges. However, current contracts do not support array type, which means that even the same type of data cannot be batch processed within a contract. For example, even for a bond, each investor needs to generate a new contract. This standard will allow arrays in a smart contract. Through a standard type, the contract will be able to use mutable sequences, simplify the implementation of contracts, and help achieve Turing complet of the equity.
+
+==Specification==
+
+Arrays are mutable sequences which are formed by placing a comma-separated list of expressions in square brackets. The indices of arrays are zero-based and any type of elements can be arrays' elements. 
+
+'''Define:'''
+{|
+| '''Type''' || '''Define''' || '''Example'''
+|-
+| Fixed-size array || <pre> define identifier : TypeName [Size] = [expr1, expr2, ..., exprSize]</pre> || <pre> define value : Integer [5] = [amount1, amount2, ..., amount5]</pre>
+|-
+| Dynamically-sized array || <pre> define identifier : TypeName [] = [expr1, expr2, ..., exprSize]</pre> || <pre> define value : Integer [] = [amount1, amount2, ..., amount5]</pre>
+|}
+
+'''TypeName:''' Integer, Amount, Boolean, String, Hash, Asset, PublicKey, Signature, Program.
+
+'''Functions:'''
+{|
+| '''Name''' || '''Meaning'''
+|-
+| length || Yield the length of the array.
+|-
+| push || Remove and Return the last element in the array.
+|}
+
+==Application==
+This BMIP could be wildly used in bonds, games, asset management and decentralized exchanges.
+
+'''Example:'''
+<pre>
+//Define the remaining amount of six bonds.
+define reAmount : Integer [6] = [100, 24, 55, 19, 90, 36]
+</pre>
+
+==References==
+
+* [https://solidity.readthedocs.io/en/v0.5.5/types.html#arrays Solidity Arrays]
+* [https://docs.python.org/2/tutorial/datastructures.html The Python Tutorial More on Lists]
